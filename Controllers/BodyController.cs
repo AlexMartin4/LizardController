@@ -333,15 +333,16 @@ namespace LizardSpace
 
         }
 
-        //Check if the lizard is currently touching the ground
+        //Ongoing ground check coroutine
         public IEnumerator GroundChecking()
         {
             while (true)
             {
                
                 Rigidbody rb = GetComponent<Rigidbody>();
-
-
+                
+                //One major consequence of the lizard not touching the ground is that it should not be able to rotate freely
+                //This is so that the character may naturally rotate off of edges rather than flatly fall
                 if (GroundCheck())
                 {
                     rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -411,7 +412,8 @@ namespace LizardSpace
                     
                 }
             }
-
+            
+            //If the number exceeds the cutoff then the lizard is mostly over a gap and therefore should be allowed to rotate off
             return numberOftrues >= groundedCutoff;
         }
 
@@ -503,7 +505,8 @@ namespace LizardSpace
             target.transform.localPosition = Vector3.zero;
             target.SetActive(true);
         }
-
+        
+        //Function called on character death
         public void FallToGround()
         {
             foreach(Collider c in floorTouchingColliders)
