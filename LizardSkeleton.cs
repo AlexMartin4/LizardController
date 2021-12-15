@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace LizardSpace
 {
-
+    //This data structures stores bones whithin the spine and legs of the Lizard Character
+    //Specifically, it stores in a linked lists bones that adehere to a specific naming convention
+    
+    
     public class LizardSkeleton : MonoBehaviour
     {
 
