@@ -1,0 +1,5 @@
+This code is a sample Character Controller system designed for Mlem Mlem (https://alexmartin4.itch.io/mlem-mlem)
+The fundamentals of the inverse kinemitc system which this project relies on for procedural animation is provided by Weaver Dev (https://weaverdev.io/blog/bonehead-procedural-animation)
+Please note that this code works as part of a larger whole and therefore might include dangling refferences.
+
+Thanks for checking my code.
