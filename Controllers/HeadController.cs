@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace LizardSpace
 {
-    
-
+    //This script is in charge of operations concerning the head of the Lizard character
+    //This includes input related to the head
+    //Head states will call functions in this script
+    //NB: This script therefore also acts as a bridge between the state controller and the tongue actions
 
     public class HeadController : MonoBehaviour, BodyPartController
     {
@@ -137,7 +139,9 @@ namespace LizardSpace
 
             if (changeHeadDirection == null) changeHeadDirection = StartCoroutine(FollowTarget());
         }
-
+        
+        
+        //Animation coroutine that fixes the eyes of the Lizard onto the current target
         IEnumerator FollowTarget()
         {
 
@@ -223,6 +227,7 @@ namespace LizardSpace
             return newDir;
         }
 
+        //Procedural animation function for the head of the Lizard
         public void LookAt(Vector3 worldSpaceTarget)
         {
             // Store the current head rotation since we will be resetting it
@@ -260,10 +265,9 @@ namespace LizardSpace
             
         }
 
+         //Procedural animation function for individual eyes of the Lizard
         public void EyeLookAt(Transform eye, Vector3 worldTarget)
         {
-
-
 
             Quaternion currentLocalRotation = eye.localRotation;
 
@@ -284,7 +288,11 @@ namespace LizardSpace
            );
         }
 
-
+        
+        //Master function for the Auto Targeting functionality
+        // 1. Cone Check for targets 
+        // 2. Sort Targets
+        // 3. Return Best Target
         public Tonguable AutoTargeting(LizardController controller)
         {
             Vector3 reference = controller.GetNeckOrientation();
@@ -296,6 +304,8 @@ namespace LizardSpace
         }
 
 
+
+        //Sorting function for selecting the best target to focus on
         public Tonguable FindBestTarget(List<Collider> inputs, Vector3 reference)
         {
             List<Tonguable> tonguables = new List<Tonguable>();
@@ -348,6 +358,8 @@ namespace LizardSpace
             return Vector3.zero;
         }
 
+
+        //Debugging
         public void OnDrawGizmos()
         {
             Debug.DrawLine(EyeL.transform.position, EyeL.transform.position + EyeL.transform.forward * 20f, Color.red);
